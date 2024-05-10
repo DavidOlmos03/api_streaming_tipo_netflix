@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\User\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -22,7 +23,22 @@ Route::group([
 ], function ($router) {
     Route::post('/register', [AuthController::class, 'register'])->name('register');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/login_streaming', [AuthController::class, 'login_streaming'])->name('login_streaming');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::post('/refresh', [AuthController::class, 'refresh'])->name('refresh');
     Route::post('/me', [AuthController::class, 'me'])->name('me');
 });
+
+
+
+//MIS RUTAS PARA EL ADMIN
+Route::group([
+    'middleware' => 'api',
+], function ($router) {
+    Route::resource("users",UsersController::class);
+    Route::post("users/{id}",[UsersController::class,"update"]);
+});
+
+// Route::group(["prefix"=>"admin"], function($router){
+
+// });
