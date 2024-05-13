@@ -21,7 +21,7 @@ class UsersResource extends JsonResource
             "email" => $this->resource->email,
             "state" => $this->resource->state,
             "role" => $this->resource->role,
-            "avatar" => $this->resource->avatar ? env("APP_URL")."storage/".$this->resource->avatar : NULL, //storage esta en...
+            "avatar" => $this->resource->avatar ? env("APP_URL")."/storage/".$this->resource->avatar : "/assets/media/avatars/300-6.jpg", //storage esta en...
             "created_at" => $this->resource->created_at->format("Y-m-d:i:s"),
         ];
     }
