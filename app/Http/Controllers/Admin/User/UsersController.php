@@ -22,7 +22,7 @@ class UsersController extends Controller
         $search = $request->get("search");
         $state = $request->get("state");
 
-        $users = User::orderBy("id","desc")->where("type_user",1)->get();
+        $users = User::filterUser($search, $state) -> orderBy("id","desc")->where("type_user",1)->get();
 
         return response()->json([
             "message" => 200,
