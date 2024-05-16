@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\User\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\ProductAndPlanes\ProductPaypalController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,7 +32,7 @@ Route::group([
 
 
 
-//MIS RUTAS PARA EL ADMIN
+//MIS RUTAS PARA EL ADMIN (Estas rutas estan protegidas)
 Route::group([
     'middleware' => 'api',
 ], function ($router) {
@@ -39,6 +40,7 @@ Route::group([
     Route::post("users/{id}",[UsersController::class,"update"]);
 });
 
+Route::resource("products",ProductPaypalController::class);
 // Route::group(["prefix"=>"admin"], function($router){
 
 // });
