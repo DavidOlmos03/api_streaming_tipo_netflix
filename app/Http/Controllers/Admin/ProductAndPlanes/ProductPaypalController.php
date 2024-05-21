@@ -40,7 +40,15 @@ class ProductPaypalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = [
+            'name' => $request -> name,
+            'description' => $request -> description,
+            'type' => $request -> type,
+            'category' => $request -> category,
+            'image_url' => 'https://avatars.githubusercontent.com/u/15802366?s=460&u=ac6cc646599f2ed6c4699a74b15192a29177f85a&v=4',
+            'home_url' => 'https://github.com/leifermendez/laravel-paypal-subscription',
+        ];
+        dd($this->paypalSubcription->storeProducts($product));
     }
 
     /**
@@ -51,7 +59,7 @@ class ProductPaypalController extends Controller
      */
     public function show($id)
     {
-        //
+        dd($this->paypalSubcription->showProduct($id));
     }
 
     /**
@@ -74,7 +82,14 @@ class ProductPaypalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product =[
+             [
+            "op" => "replace",
+            "path" => "/".$request -> path,
+            "value" => $request -> value
+        ]
+    ];
+        dd($this->paypalSubcription->updateProducts($id,$product));
     }
 
     /**

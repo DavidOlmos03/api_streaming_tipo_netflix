@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-04-2024 a las 18:28:08
+-- Tiempo de generación: 19-05-2024 a las 07:06:19
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -110,15 +110,21 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `surname`, `email`, `type_user`, `role_id`, `state`, `avatar`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'David', NULL, 'email@correo.com', 1, 1, 1, NULL, NULL, '$2y$10$yLxZKFxq97EKVg5vzupkluZxKKIi1K1z4.8Br0OzEMu3NmyQyDstS', NULL, '2024-04-25 00:10:33', '2024-04-25 00:10:33');
+INSERT INTO `users` (`id`, `name`, `surname`, `email`, `type_user`, `role_id`, `state`, `avatar`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'David', NULL, 'juan@correo.com', 1, 1, 1, NULL, NULL, '$2y$10$yLxZKFxq97EKVg5vzupkluZxKKIi1K1z4.8Br0OzEMu3NmyQyDstS', NULL, '2024-04-25 00:10:33', '2024-04-25 00:10:33', NULL),
+(2, 'Juan David', 'Ruiz', 'juanruiz@correo.com', 1, 1, 1, 'users/b57NnORhhxVWQ5JjXGYiXwWPanNgqsignh9yvTUF.jpg', NULL, '12345678', NULL, '2024-05-13 09:51:34', '2024-05-13 23:29:40', NULL),
+(3, 'Damian Robert', 'Mars', 'damian@correo.com', 1, 1, 2, 'users/hkb2KNn083toLBHnV00OziofYMJ4QSmh9fPKXFiw.jpg', NULL, '12345678', NULL, '2024-05-13 09:58:04', '2024-05-14 00:19:48', '2024-05-14 00:19:48'),
+(4, 'Steven', 'Smith', 'steven@correo.com', 1, 1, 1, 'users/Ak9cl5xIRIlJwmzYIWMmJdE8YpkkQNkP0pQzfKzZ.jpg', NULL, '12345678', NULL, '2024-05-13 16:23:33', '2024-05-14 00:18:30', NULL),
+(5, 'Guy', 'Turin', 'guy@correo.com', 1, 1, 2, 'users/8zHBWgGOvAiJU1vYour709BQph0mDUFgcj5SNbiF.jpg', NULL, '12345678', NULL, '2024-05-13 22:22:14', '2024-05-14 00:21:29', NULL),
+(6, 'Sami', 'Robert', 'sami@correo.com', 1, 1, 1, 'users/WHsXZEhq8NZPGdDh18ohOWQMS3BjCGIZSwdsK7UH.jpg', NULL, '12345678', NULL, '2024-05-13 23:18:07', '2024-05-13 23:18:07', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -182,7 +188,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
