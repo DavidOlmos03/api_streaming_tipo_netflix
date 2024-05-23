@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Admin\ProductAndPlanes;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\Helper\PaypalSubcription;
-
+use App\Models\Product\ProductPaypal;
 
 
 class ProductPaypalController extends Controller
@@ -19,6 +19,8 @@ class ProductPaypalController extends Controller
      */
     public function index()
     {
+        $products = ProductPaypal::orderBy("id","desc")->get();
+
         dd($this->paypalSubcription->getProducts());  //Esto es para que Laravel imprima el contenido de lo que esta dentro de dd() y retenga la depuración ie el resto de la función no se ejecuta
     }
 
@@ -48,7 +50,12 @@ class ProductPaypalController extends Controller
             'image_url' => 'https://avatars.githubusercontent.com/u/15802366?s=460&u=ac6cc646599f2ed6c4699a74b15192a29177f85a&v=4',
             'home_url' => 'https://github.com/leifermendez/laravel-paypal-subscription',
         ];
-        dd($this->paypalSubcription->storeProducts($product));
+
+        $response = $this->paypalSubcription->storeProducts($product);
+        $product["id_producto_paypal"] = $response["id"];
+        $product_paypal = ProductPaypal::create($product);
+
+        return response()->json(["product_paypal"=>$product_paypal]);
     }
 
     /**
@@ -85,11 +92,38 @@ class ProductPaypalController extends Controller
         $product =[
              [
             "op" => "replace",
-            "path" => "/".$request -> path,
-            "value" => $request -> value
-        ]
+            "path" => "/name",
+            "value" => $request -> name
+             ],
+             [
+                "op" => "replace",
+                "path" => "/type",
+                "value" => $request -> type
+             ],
+             [
+                "op" => "replace",
+                "path" => "/category",
+                "value" => $request -> category
+             ],
+             [
+                "op" => "replace",
+                "path" => "/description",
+                "value" => $request -> description
+            ]
     ];
-        dd($this->paypalSubcription->updateProducts($id,$product));
+
+    $product_paypal = ProductPaypal::findOrFail($id);
+
+    $response = $this->paypalSubcription->storeProducts($product_paypal-> id_product_paypal, $product);
+    // $product["id_producto_paypal"] = $response["id"];
+    $product_paypal-> update([
+        "name" => $request -> name,
+        "type" => $request -> type,
+        "category" => $request -> category,
+        "description" => $request -> description,
+    ]);
+    return response()->json(["product_paypal"=>$product_paypal]);
+    // dd($this->paypalSubcription->updateProducts($id,$product));
     }
 
     /**
