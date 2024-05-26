@@ -21,7 +21,21 @@ class ProductPaypalController extends Controller
     {
         $products = ProductPaypal::orderBy("id","desc")->get();
 
-        dd($this->paypalSubcription->getProducts());  //Esto es para que Laravel imprima el contenido de lo que esta dentro de dd() y retenga la depuración ie el resto de la función no se ejecuta
+        // dd($this->paypalSubcription->getProducts());  //Esto es para que Laravel imprima el contenido de lo que esta dentro de dd() y retenga la depuración ie el resto de la función no se ejecuta
+
+        return response()->json([
+            "products" => $products -> map(function($product){
+                return [
+                    "id" => $product->id,
+                    "name" => $product->name,
+                    "type" => $product->type,
+                    "category" => $product->category,
+                    "description" => $product->description,
+                    "id_product_paypal" => $product->id_product_paypal,
+                    "created_at" => $product->created_at->format("Y-m-d h:i:s")
+                ];
+            }),
+        ]);
     }
 
     /**
