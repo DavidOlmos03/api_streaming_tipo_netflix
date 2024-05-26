@@ -52,7 +52,7 @@ class ProductPaypalController extends Controller
         ];
 
         $response = $this->paypalSubcription->storeProducts($product);
-        $product["id_producto_paypal"] = $response["id"];
+        $product["id_product_paypal"] = $response["id"];
         $product_paypal = ProductPaypal::create($product);
 
         return response()->json(["product_paypal"=>$product_paypal]);

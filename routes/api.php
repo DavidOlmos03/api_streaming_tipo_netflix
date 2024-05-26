@@ -38,9 +38,9 @@ Route::group([
 ], function ($router) {
     Route::resource("users",UsersController::class);
     Route::post("users/{id}",[UsersController::class,"update"]);
+    Route::resource("products",ProductPaypalController::class);
 });
 
-Route::resource("products",ProductPaypalController::class);
 // Route::group(["prefix"=>"admin"], function($router){
 
 // });
