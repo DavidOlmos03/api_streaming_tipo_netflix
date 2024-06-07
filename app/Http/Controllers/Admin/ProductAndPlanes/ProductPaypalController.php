@@ -134,7 +134,7 @@ class ProductPaypalController extends Controller
                 "path" => "/description",
                 "value" => $request -> description
             ]
-    ];
+        ];
 
     $product_paypal = ProductPaypal::findOrFail($id);
 
