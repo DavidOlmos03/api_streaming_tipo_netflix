@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\ProductAndPlanes\ProductPaypalController;
 use App\Http\Controllers\Admin\ProductAndPlanes\PlanPaypalController;
+use App\Http\Controllers\Admin\Streaming\StreamingGenresController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,10 @@ Route::group([
     Route::post("users/{id}",[UsersController::class,"update"]);
     Route::resource("products",ProductPaypalController::class);
     Route::resource("planes",PlanPaypalController::class);
+    Route::resource("genres",StreamingGenresController::class);
+    Route::post("genres/{id}",[StreamingGenresController::class,"update"]);
+
+
 });
 
 // Route::group(["prefix"=>"admin"], function($router){
