@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\ProductAndPlanes\ProductPaypalController;
 use App\Http\Controllers\Admin\ProductAndPlanes\PlanPaypalController;
 use App\Http\Controllers\Admin\Streaming\StreamingGenresController;
+use App\Http\Controllers\Admin\Streaming\StreamingActorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,8 @@ Route::group([
     Route::resource("planes",PlanPaypalController::class);
     Route::resource("genres",StreamingGenresController::class);
     Route::post("genres/{id}",[StreamingGenresController::class,"update"]);
+    Route::resource("actors",StreamingActorController::class);
+    Route::post("actors/{id}",[StreamingActorController::class,"update"]);
 
 
 });

@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Genre extends Model
+class Actor extends Model
 {
     use HasFactory;
     use SoftDeletes;
     protected $fillable = [
-        "title",
+        "full_name",
         "imagen",
         "type",
         "state"
@@ -32,14 +32,13 @@ class Genre extends Model
 
     // scope es una palabra reservada para indicar que es un scope, pero para llamar a la función solo
     // se debe utilizar el filterGenres
-    function scopefilterGenres($query, $search, $state){
+    function scopefilterActors($query, $search, $state){
         if($state){
             $query -> where("state",$state);
         }
         if ($search) {
-            $query->where("title","like","%".$search."%");
+            $query->where("full_name","like","%".$search."%");
         }
         return $query;
     }
-
 }
