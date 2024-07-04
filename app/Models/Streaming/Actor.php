@@ -15,7 +15,8 @@ class Actor extends Model
         "full_name",
         "imagen",
         "type",
-        "state"
+        "state",
+        "profession"
     ];
 
     // Se establece la fecha de creación de un plan

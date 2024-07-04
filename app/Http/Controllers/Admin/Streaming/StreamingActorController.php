@@ -29,6 +29,7 @@ class StreamingActorController extends Controller
                 return [
                     "id"=>$actor-> id,
                     "full_name"=>$actor-> full_name,
+                    "profession"=>$actor-> profession,
                     "imagen"=>env("APP_URL")."/storage/".$actor->imagen,
                     "type"=>$actor-> type,
                     "state"=>$actor-> state,
@@ -81,6 +82,7 @@ class StreamingActorController extends Controller
             "actor" =>  [
                 "id"=>$actor-> id,
                 "full_name"=>$actor-> full_name,
+                "profession"=>$actor-> profession,
                 "imagen"=>env("APP_URL")."/storage/".$actor->imagen,
                 "type"=>$actor-> type,
                 "state"=>$actor-> state,
@@ -145,6 +147,7 @@ class StreamingActorController extends Controller
             "actor" =>  [
                 "id"=>$actor-> id,
                 "full_name"=>$actor-> full_name,
+                "profession"=>$actor-> profession,
                 "imagen"=>env("APP_URL")."/storage/".$actor->imagen,
                 "type"=>$actor-> type,
                 "state"=>$actor-> state,
