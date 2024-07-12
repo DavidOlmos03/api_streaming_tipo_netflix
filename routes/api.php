@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\ProductAndPlanes\PlanPaypalController;
 use App\Http\Controllers\Admin\Streaming\StreamingGenresController;
 use App\Http\Controllers\Admin\Streaming\StreamingTagController;
 use App\Http\Controllers\Admin\Streaming\StreamingActorController;
+use App\Http\Controllers\Admin\Streaming\StreamingController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +52,7 @@ Route::group([
     Route::resource("actors",StreamingActorController::class);
     Route::post("actors/{id}",[StreamingActorController::class,"update"]);
     Route::resource("tags",StreamingTagController::class);
+    Route::resource("streaming",StreamingController::class);
 
 });
 

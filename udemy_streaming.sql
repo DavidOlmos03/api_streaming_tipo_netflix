@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 19-05-2024 a las 07:06:19
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Host: 127.0.0.1
+-- Generation Time: Jul 09, 2024 at 02:42 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,39 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `udemy_streaming`
+-- Database: `udemy_streaming`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `failed_jobs`
+-- Table structure for table `actors`
+--
+
+CREATE TABLE `actors` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `full_name` varchar(250) NOT NULL,
+  `imagen` varchar(250) NOT NULL,
+  `type` tinyint(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT '1 es director y 2 es actor',
+  `state` tinyint(1) UNSIGNED NOT NULL DEFAULT 1,
+  `profession` varchar(250) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `actors`
+--
+
+INSERT INTO `actors` (`id`, `full_name`, `imagen`, `type`, `state`, `profession`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Itm', 'streaming/actors/QLfbj59QKBwtxhrzINnjkCk3CT13ooYrr7bYBmzJ.png', 1, 1, 'Director', '2024-07-04 13:46:19', '2024-07-04 13:46:19', NULL),
+(2, 'Hernan Torres', 'streaming/actors/bWXQ7nWRzhJVPm1o0JLrcXLczED9du8loiBt97mB.jpg', 2, 1, 'Camarografo', '2024-07-04 14:16:05', '2024-07-04 19:44:26', '2024-07-04 19:44:26');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `failed_jobs`
 --
 
 CREATE TABLE `failed_jobs` (
@@ -40,7 +66,34 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `migrations`
+-- Table structure for table `genres`
+--
+
+CREATE TABLE `genres` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(250) NOT NULL,
+  `imagen` varchar(250) NOT NULL,
+  `type` tinyint(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT '1 es peliculas y 2 es tv show y videos',
+  `state` tinyint(1) UNSIGNED NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `genres`
+--
+
+INSERT INTO `genres` (`id`, `title`, `imagen`, `type`, `state`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Action', 'streaming/genres/5sGh20pYFRs8im7bBxXbQcIWcVfPWKDls90BaMgN.jpg', 1, 1, '2024-07-02 04:35:27', '2024-07-02 04:35:27', NULL),
+(3, 'Action', 'streaming/genres/F96gi5QPVGEGUjjXVs8SO98m67cAfZGVuzsYP0GQ.jpg', 2, 2, '2024-07-02 05:39:37', '2024-07-02 13:07:06', NULL),
+(4, 'Animation', 'streaming/genres/pb7VjHiL1Aay5Xt5WX5ka6WqloRV7nw5DiiiBGiU.jpg', 1, 1, '2024-07-02 10:56:04', '2024-07-02 12:51:36', NULL),
+(5, 'Comedy', 'streaming/genres/9XpCxkT6AtLdnsWyV9neqlMVXYUspZR6D3utjg5G.jpg', 1, 1, '2024-07-02 12:53:22', '2024-07-02 17:53:49', '2024-07-02 17:53:49');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -50,7 +103,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Volcado de datos para la tabla `migrations`
+-- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -61,7 +114,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `password_resets`
+-- Table structure for table `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -73,7 +126,62 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `roles`
+-- Table structure for table `plan_paypals`
+--
+
+CREATE TABLE `plan_paypals` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `description` text DEFAULT NULL,
+  `precio_mensual` double NOT NULL,
+  `precio_anual` double NOT NULL,
+  `month_free` tinyint(2) UNSIGNED NOT NULL DEFAULT 1,
+  `id_plan_paypal_mensual` varchar(150) NOT NULL,
+  `id_plan_paypal_anual` varchar(150) NOT NULL,
+  `id_product_paypal` varchar(250) DEFAULT NULL,
+  `product_paypal_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `plan_paypals`
+--
+
+INSERT INTO `plan_paypals` (`id`, `name`, `description`, `precio_mensual`, `precio_anual`, `month_free`, `id_plan_paypal_mensual`, `id_plan_paypal_anual`, `id_product_paypal`, `product_paypal_id`, `created_at`, `updated_at`) VALUES
+(2, 'BASICO', 'CON EL PLAN BASICO EL CLIENTE VA A PODER VER UNICAMENTE PELICULAS', 20, 144, 1, 'P-9CN86315VP8848250MZRQ2LI', 'P-3L555179JH756084EMZRQ2LY', 'PROD-1XX1571074681804N', 1, '2024-06-07 13:37:51', '2024-06-07 13:37:51'),
+(3, 'STANDARzz', 'EL PLAN STANDAR VA A PERMITIR AL CLIENTE VER LAS PELICULAS Y SERIES', 45, 400, 1, 'P-90X78400SD162044XMZRRNYA', 'P-8VB55188GW017502MMZRRNYI', 'PROD-1XX1571074681804N', 1, '2024-06-07 14:19:13', '2024-06-07 16:08:20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_paypals`
+--
+
+CREATE TABLE `product_paypals` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `type` varchar(150) NOT NULL,
+  `category` varchar(150) NOT NULL,
+  `description` text DEFAULT NULL,
+  `id_product_paypal` varchar(250) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `product_paypals`
+--
+
+INSERT INTO `product_paypals` (`id`, `name`, `type`, `category`, `description`, `id_product_paypal`, `created_at`, `updated_at`) VALUES
+(1, 'Plataforma de suscripción', 'SERVICE', 'MOVIE', 'El cliente va a poder ver sus peliculas, series además de novelas y videos', 'PROD-1XX1571074681804N', '2024-05-21 01:04:45', '2024-05-24 01:05:09'),
+(5, 'Ventas de cursos Online', 'DIGITAL', 'ONLINE_SERVICES', 'Venta de cursos de desarrollo web para estudiantes de udemy', 'PROD-4UX51542W1707271K', '2024-05-26 12:46:54', '2024-05-26 12:46:54'),
+(6, 'Soluciones multimedia Vimeo', 'DIGITAL', 'ONLINE_DATING', 'Plataforma para poder alojar los recursos multimedia de tu página udemy', 'PROD-0U6662105F202192B', '2024-05-26 14:43:03', '2024-05-26 16:17:46');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `roles`
 --
 
 CREATE TABLE `roles` (
@@ -85,7 +193,7 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `roles`
+-- Dumping data for table `roles`
 --
 
 INSERT INTO `roles` (`id`, `name`, `permisos`, `created_at`, `updated_at`) VALUES
@@ -94,7 +202,32 @@ INSERT INTO `roles` (`id`, `name`, `permisos`, `created_at`, `updated_at`) VALUE
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `users`
+-- Table structure for table `tags`
+--
+
+CREATE TABLE `tags` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(250) NOT NULL,
+  `type` tinyint(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT '1 es peliculas y 2 es tv show y videos',
+  `state` tinyint(1) UNSIGNED NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tags`
+--
+
+INSERT INTO `tags` (`id`, `title`, `type`, `state`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Action', 1, 1, '2024-07-07 16:27:13', '2024-07-07 16:43:44', NULL),
+(2, '4k Ultra', 2, 2, '2024-07-07 16:28:18', '2024-07-07 21:47:43', '2024-07-07 21:47:43'),
+(3, '4k Ultra', 2, 1, '2024-07-07 16:50:20', '2024-07-07 16:50:20', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -115,7 +248,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Volcado de datos para la tabla `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `surname`, `email`, `type_user`, `role_id`, `state`, `avatar`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -124,71 +257,132 @@ INSERT INTO `users` (`id`, `name`, `surname`, `email`, `type_user`, `role_id`, `
 (3, 'Damian Robert', 'Mars', 'damian@correo.com', 1, 1, 2, 'users/hkb2KNn083toLBHnV00OziofYMJ4QSmh9fPKXFiw.jpg', NULL, '12345678', NULL, '2024-05-13 09:58:04', '2024-05-14 00:19:48', '2024-05-14 00:19:48'),
 (4, 'Steven', 'Smith', 'steven@correo.com', 1, 1, 1, 'users/Ak9cl5xIRIlJwmzYIWMmJdE8YpkkQNkP0pQzfKzZ.jpg', NULL, '12345678', NULL, '2024-05-13 16:23:33', '2024-05-14 00:18:30', NULL),
 (5, 'Guy', 'Turin', 'guy@correo.com', 1, 1, 2, 'users/8zHBWgGOvAiJU1vYour709BQph0mDUFgcj5SNbiF.jpg', NULL, '12345678', NULL, '2024-05-13 22:22:14', '2024-05-14 00:21:29', NULL),
-(6, 'Sami', 'Robert', 'sami@correo.com', 1, 1, 1, 'users/WHsXZEhq8NZPGdDh18ohOWQMS3BjCGIZSwdsK7UH.jpg', NULL, '12345678', NULL, '2024-05-13 23:18:07', '2024-05-13 23:18:07', NULL);
+(6, 'Sami', 'Robert', 'sami@correo.com', 1, 1, 1, 'users/WHsXZEhq8NZPGdDh18ohOWQMS3BjCGIZSwdsK7UH.jpg', NULL, '12345678', NULL, '2024-05-13 23:18:07', '2024-05-13 23:18:07', NULL),
+(7, 'Payasin', 'Smith', 'payasin@correo.com', 1, 1, 1, 'users/4dd3zJfUMovtsiCYpfD0JYWS6SaF0S53LgLBIVPf.jpg', NULL, '12345678', NULL, '2024-07-02 09:23:41', '2024-07-02 15:27:41', '2024-07-02 15:27:41');
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `failed_jobs`
+-- Indexes for table `actors`
+--
+ALTER TABLE `actors`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Indices de la tabla `migrations`
+-- Indexes for table `genres`
+--
+ALTER TABLE `genres`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `password_resets`
+-- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Indices de la tabla `roles`
+-- Indexes for table `plan_paypals`
+--
+ALTER TABLE `plan_paypals`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_paypals`
+--
+ALTER TABLE `product_paypals`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `users`
+-- Indexes for table `tags`
+--
+ALTER TABLE `tags`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `failed_jobs`
+-- AUTO_INCREMENT for table `actors`
+--
+ALTER TABLE `actors`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `migrations`
+-- AUTO_INCREMENT for table `genres`
+--
+ALTER TABLE `genres`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT de la tabla `roles`
+-- AUTO_INCREMENT for table `plan_paypals`
+--
+ALTER TABLE `plan_paypals`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `product_paypals`
+--
+ALTER TABLE `product_paypals`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de la tabla `users`
+-- AUTO_INCREMENT for table `tags`
+--
+ALTER TABLE `tags`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
