@@ -25,7 +25,8 @@ class Streaming extends Model
         "vimeo_id",
         "time",
         "tags",
-        "state"
+        "state",
+        "type"
     ];
 
         // Se establece la fecha de creación de un plan

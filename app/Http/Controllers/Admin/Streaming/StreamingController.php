@@ -7,7 +7,8 @@ use App\Models\Streaming\Streaming;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-
+use App\Http\Resources\Streaming\StreamingCollection;
+use App\Http\Resources\Streaming\StreamingResource;
 class StreamingController extends Controller
 {
     /**
@@ -25,7 +26,7 @@ class StreamingController extends Controller
 
         return response()->json([
             "message" => 200,
-            "streamings" => $streamings, //->API RESORCE
+            "streamings" => StreamingCollection::make($streamings), //->API RESORCE
         ]);
 
     }
@@ -71,7 +72,7 @@ class StreamingController extends Controller
         $streaming = Streaming::create($request->all());
         return response()->json([
             "message" => 200,
-            "streaming" => $streaming,
+            "streaming" => StreamingResource::make($streaming),
             // "genre" =>  [
             //     "id"=>$streaming-> id,
             //     "title"=>$streaming-> title,
@@ -138,7 +139,7 @@ class StreamingController extends Controller
 
         return response()->json([
             "message" => 200,
-            "streaming" => $streaming,
+            "streaming" => StreamingResource::make($streaming),
             //  [
             //     "id"=>$streaming-> id,
             //     "title"=>$streaming-> title,
@@ -159,8 +160,8 @@ class StreamingController extends Controller
      */
     public function destroy($id)
     {
-        $genre = Streaming::findOrFail($id);
-        $genre->delete();
+        $streaming = Streaming::findOrFail($id);
+        $streaming->delete();
 
         return response()->json(["message"=>200]);
     }
