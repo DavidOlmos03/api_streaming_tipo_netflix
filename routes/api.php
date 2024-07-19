@@ -52,7 +52,12 @@ Route::group([
     Route::resource("actors",StreamingActorController::class);
     Route::post("actors/{id}",[StreamingActorController::class,"update"]);
     Route::resource("tags",StreamingTagController::class);
+
+    // Rutas para streaming
+    // obs. Las rutas de tipo get deben ir primero que las otras rutas
+    Route::get("streaming/config_all",[StreamingController::class,"config_all"]);
     Route::resource("streaming",StreamingController::class);
+    Route::post("streaming/{id}",[StreamingController::class,"update"]);
 
 });
 

@@ -51,7 +51,7 @@ class Streaming extends Model
         function getTags(){
             // 5,6,7 -> [5,6,7]
             $tags = explode(",",$this->tags);
-            $tags_model = Tag::whereIn("id",$tags)->get();
+            $tags_model = Tag::whereIn("title",$tags)->get();
             return $tags_model;
         }
         // scope es una palabra reservada para indicar que es un scope, pero para llamar a la función solo

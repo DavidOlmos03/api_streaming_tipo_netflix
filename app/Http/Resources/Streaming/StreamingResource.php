@@ -18,7 +18,7 @@ class StreamingResource extends JsonResource
             "id" => $this->resource->id,
             "title" => $this->resource->title,
             "slug" => $this->resource->slug,
-            "imagen" => env("APP_URL")."storage/".$this->resource->imagen,
+            "imagen" => env("APP_URL")."/storage/".$this->resource->imagen,
             "subtitle" => $this->resource->subtitle,
             "description" => $this->resource->description,
             "genre_id" => $this->resource->genre_id,
@@ -33,9 +33,17 @@ class StreamingResource extends JsonResource
             "tags_multiple" => $this->resource->getTags(),
             "state" => $this->resource->state,
             "created_at" => $this->resource->created_at->format("Y-m-d h:i:s"),
+            // "actors" => $this->resource->actors->map(function($actor_streaming){
+            //     return [
+            //         "id" => $actor_streaming -> id,
+            //         "full_name" => $actor_streaming->actor->full_name,
+            //         "profesion" => $actor_streaming->actor->profesion,
+            //     ];
+            // })
             "actors" => $this->resource->actors->map(function($actor){
+                // echo $actor;
                 return [
-                    "id" => $actor->id,
+                    "id" => $actor -> id,
                     "full_name" => $actor->full_name,
                     "profesion" => $actor->profesion,
                 ];
