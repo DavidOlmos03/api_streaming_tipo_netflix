@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 09, 2024 at 02:42 PM
+-- Generation Time: Jul 20, 2024 at 11:37 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -45,7 +45,8 @@ CREATE TABLE `actors` (
 
 INSERT INTO `actors` (`id`, `full_name`, `imagen`, `type`, `state`, `profession`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'Itm', 'streaming/actors/QLfbj59QKBwtxhrzINnjkCk3CT13ooYrr7bYBmzJ.png', 1, 1, 'Director', '2024-07-04 13:46:19', '2024-07-04 13:46:19', NULL),
-(2, 'Hernan Torres', 'streaming/actors/bWXQ7nWRzhJVPm1o0JLrcXLczED9du8loiBt97mB.jpg', 2, 1, 'Camarografo', '2024-07-04 14:16:05', '2024-07-04 19:44:26', '2024-07-04 19:44:26');
+(2, 'Hernan Torres', 'streaming/actors/bWXQ7nWRzhJVPm1o0JLrcXLczED9du8loiBt97mB.jpg', 2, 1, 'Camarografo', '2024-07-04 14:16:05', '2024-07-04 19:44:26', '2024-07-04 19:44:26'),
+(3, 'prueba', 'streaming/actors/UhPGF3DKc8t8cRpSM5yEpIKzX5WXwVhhwdZ8c1Sw.jpg', 2, 1, 'prueba', '2024-07-18 19:06:08', '2024-07-18 19:06:08', NULL);
 
 -- --------------------------------------------------------
 
@@ -202,6 +203,102 @@ INSERT INTO `roles` (`id`, `name`, `permisos`, `created_at`, `updated_at`) VALUE
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `streamings`
+--
+
+CREATE TABLE `streamings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(250) NOT NULL,
+  `slug` text NOT NULL,
+  `subtitle` text NOT NULL,
+  `imagen` varchar(250) DEFAULT NULL,
+  `genre_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `vimeo_id` varchar(50) DEFAULT NULL,
+  `time` varchar(50) DEFAULT NULL,
+  `description` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `tags` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `state` tinyint(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT '1 es inactivo y 2 es publico',
+  `type` tinyint(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT '1 es movie, 2 es tv show y 3 video',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `streamings`
+--
+
+INSERT INTO `streamings` (`id`, `title`, `slug`, `subtitle`, `imagen`, `genre_id`, `vimeo_id`, `time`, `description`, `tags`, `state`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'ZOMBIES ISLAND', 'zombies-island', 'Baileys Irish Cream is an Irish cream liqueur an alcoholic', 'streaming/uytFPEr5OcroJrdxgJThWug2JUVlsjfqjxJPhNLc.jpg', 1, NULL, NULL, 'Baileys Irish Cream is an Irish cream liqueur an alcoholic beverage flavoured with cream, cocoa, and Irish whiskey made by Diageo at Republic of Ireland and in Mallusk, Northern Ireland.', 'Action', 1, 1, '2024-07-17 00:44:47', '2024-07-18 23:08:25', NULL),
+(6, 'p2', 'p2', 'prueba sub', 'streaming/AIYuTa3OUb78rlYE5bArCgY4HBNuYijBBOzYFErk.jpg', 4, NULL, NULL, 'p2', 'Action,4k Ultra', 1, 1, '2024-07-18 18:50:59', '2024-07-20 18:50:58', NULL),
+(7, 'prueba2', 'prueba2', 'prueba2', 'streaming/O4u2D0LRxj4ZUIGS8IZuKUvI7d36eHe0zxljkbxo.jpg', 1, NULL, NULL, 'prueba2', 'Action', 1, 1, '2024-07-18 22:41:55', '2024-07-20 20:27:19', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `streaming_actors`
+--
+
+CREATE TABLE `streaming_actors` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `streaming_id` bigint(20) UNSIGNED NOT NULL,
+  `actor_id` bigint(20) DEFAULT NULL,
+  `state` tinyint(1) UNSIGNED NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `streaming_actors`
+--
+
+INSERT INTO `streaming_actors` (`id`, `streaming_id`, `actor_id`, `state`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 1, 1, '2024-07-17 00:44:47', '2024-07-17 00:44:47', NULL),
+(6, 6, 1, 1, '2024-07-18 18:50:59', '2024-07-19 07:51:35', '2024-07-19 07:51:35'),
+(7, 7, 1, 1, '2024-07-18 22:41:55', '2024-07-21 01:27:57', '2024-07-21 01:27:57'),
+(8, 6, 3, 1, '2024-07-19 02:51:35', '2024-07-19 02:51:35', NULL),
+(10, 7, 3, 1, '2024-07-20 20:27:57', '2024-07-21 01:34:18', '2024-07-21 01:34:18'),
+(14, 7, 1, 1, '2024-07-20 20:36:07', '2024-07-20 20:36:07', NULL),
+(15, 7, 3, 1, '2024-07-20 20:36:07', '2024-07-20 20:36:07', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `streaming_episodes`
+--
+
+CREATE TABLE `streaming_episodes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `streaming_season_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(250) NOT NULL,
+  `state` tinyint(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT '1 es activo',
+  `vimeo_id` varchar(50) DEFAULT NULL,
+  `time` varchar(50) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `streaming_seasons`
+--
+
+CREATE TABLE `streaming_seasons` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `streaming_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(250) NOT NULL,
+  `state` tinyint(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT '1 es activo',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tags`
 --
 
@@ -314,6 +411,30 @@ ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `streamings`
+--
+ALTER TABLE `streamings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `streaming_actors`
+--
+ALTER TABLE `streaming_actors`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `streaming_episodes`
+--
+ALTER TABLE `streaming_episodes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `streaming_seasons`
+--
+ALTER TABLE `streaming_seasons`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tags`
 --
 ALTER TABLE `tags`
@@ -334,7 +455,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `actors`
 --
 ALTER TABLE `actors`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -371,6 +492,30 @@ ALTER TABLE `product_paypals`
 --
 ALTER TABLE `roles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `streamings`
+--
+ALTER TABLE `streamings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `streaming_actors`
+--
+ALTER TABLE `streaming_actors`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `streaming_episodes`
+--
+ALTER TABLE `streaming_episodes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `streaming_seasons`
+--
+ALTER TABLE `streaming_seasons`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tags`

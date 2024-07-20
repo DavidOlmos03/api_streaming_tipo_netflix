@@ -191,17 +191,17 @@ class StreamingController extends Controller
 
         $streaming -> update($request->all());
 
-        // $streaming_actor = json_decode($request->actors_selected,true);
-        // foreach ($streaming->actors as $key => $actor_s) {
-        //     $actor_s->delete();
-        // }
+        $streaming_actor = json_decode($request->actors_selected,true);
+        foreach ($streaming->actors as $key => $actor_s) {
+            $actor_s->delete();
+        }
 
-        // foreach($streaming_actor as $key => $streaming_ac){
-        //     StreamingActor::create([
-        //         "streaming_id" => $streaming->id,
-        //         "actor_id" => $streaming_ac["id"]
-        //     ]);
-        // }
+        foreach($streaming_actor as $key => $streaming_ac){
+            StreamingActor::create([
+                "streaming_id" => $streaming->id,
+                "actor_id" => $streaming_ac["id"]
+            ]);
+        }
 
         return response()->json([
             "message" => 200,

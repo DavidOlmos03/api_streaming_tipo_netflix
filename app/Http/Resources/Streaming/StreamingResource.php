@@ -33,21 +33,22 @@ class StreamingResource extends JsonResource
             "tags_multiple" => $this->resource->getTags(),
             "state" => $this->resource->state,
             "created_at" => $this->resource->created_at->format("Y-m-d h:i:s"),
-            // "actors" => $this->resource->actors->map(function($actor_streaming){
-            //     return [
-            //         "id" => $actor_streaming -> id,
-            //         "full_name" => $actor_streaming->actor->full_name,
-            //         "profesion" => $actor_streaming->actor->profesion,
-            //     ];
-            // })
-            "actors" => $this->resource->actors->map(function($actor){
-                // echo $actor;
+            "actors" => $this->resource->actors->map(function($actor_streaming){
                 return [
-                    "id" => $actor -> id,
-                    "full_name" => $actor->full_name,
-                    "profesion" => $actor->profesion,
+                    "id" => $actor_streaming -> id,
+                    "full_name" => $actor_streaming->actor->full_name,
+                    "profession" => $actor_streaming->actor->profession,
                 ];
             })
+            // "actors" => $this->resource->actors->map(function($actor){
+            //     // echo $actor
+            //     return [
+            //         "id" => $actor -> id,
+            //         "full_name" => $actor->full_name,
+            //         "profesion" => $actor->profesion,
+            //     ];
+            // })
         ];
+
     }
 }
