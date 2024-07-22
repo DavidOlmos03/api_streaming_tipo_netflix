@@ -170,7 +170,7 @@ class StreamingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $streaming_v = Streaming::where("id","<>",$id)->where("title",$request->title)->where("type",$request->type)->first();;
+        $streaming_v = Streaming::where("id","<>",$id)->where("title",$request->title)->first();;
         if ($streaming_v) {
             # code...
             return response()->json([
@@ -187,6 +187,7 @@ class StreamingController extends Controller
             $request -> request->add(["imagen"=>$path]);
         }
 
+        // El slug es para verificar si existe un cambio por ejemplo en el titulo
         $request->request->add(["slug" => Str::slug($request->title)]);
 
         $streaming -> update($request->all());

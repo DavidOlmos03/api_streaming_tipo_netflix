@@ -35,7 +35,7 @@ class StreamingResource extends JsonResource
             "created_at" => $this->resource->created_at->format("Y-m-d h:i:s"),
             "actors" => $this->resource->actors->map(function($actor_streaming){
                 return [
-                    "id" => $actor_streaming -> id,
+                    "id" => $actor_streaming -> actor-> id,
                     "full_name" => $actor_streaming->actor->full_name,
                     "profession" => $actor_streaming->actor->profession,
                 ];
