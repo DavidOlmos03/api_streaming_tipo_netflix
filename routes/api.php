@@ -58,6 +58,7 @@ Route::group([
     Route::get("streaming/config_all",[StreamingController::class,"config_all"]);
     Route::resource("streaming",StreamingController::class);
     Route::post("streaming/{id}",[StreamingController::class,"update"]);
+    Route::post("streaming/upload_video/{id}",[StreamingController::class,"upload_video"]);
 
 });
 

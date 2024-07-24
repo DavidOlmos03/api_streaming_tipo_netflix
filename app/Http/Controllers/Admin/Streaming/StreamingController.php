@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Streaming;
 
 use App\Http\Controllers\Controller;
 use App\Models\Streaming\Streaming;
+// use getID3;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -13,6 +14,8 @@ use App\Models\Streaming\StreamingActor;
 use App\Models\Streaming\Tag;
 use App\Models\Streaming\Actor;
 use App\Models\Streaming\Genre;
+use Owenoj\LaravelGetId3\GetId3;
+use Vimeo\Laravel\Facades\Vimeo;
 class StreamingController extends Controller
 {
     /**
@@ -216,6 +219,20 @@ class StreamingController extends Controller
             //     "created_at"=>$streaming-> created_at->format("Y-m-d h:i:s"),
 
             // ],
+        ]);
+    }
+
+    public function upload_video(Request $request, $id){
+        $time = 0;
+        $track = new GetId3($request->file("video"));
+
+        error_log($track->getPlaytimeSeconds());
+
+        $response = Vimeo::upload($request->file("video"));
+        error_log(json_encode($response));
+
+        return response([
+            "message"=>200
         ]);
     }
 
