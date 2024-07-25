@@ -226,13 +226,40 @@ class StreamingController extends Controller
         $time = 0;
         $track = new GetId3($request->file("video"));
 
-        error_log($track->getPlaytimeSeconds());
+        // error_log($track->getPlaytimeSeconds());
+        $time_video = $track->getPlaytimeSeconds();
+
 
         $response = Vimeo::upload($request->file("video"));
-        error_log(json_encode($response));
+        // error_log(json_encode($response));
+        // separo la respuesta del backend "/videos/h23j431" -> ["","videos","h23j431"] (donde h23j431 es el código en Vimeo)
+        $vimeo_id = explode("/",$response)[2];
 
+        $streaming = Streaming::findOrFail($id);
+        $streaming->update(["vimeo_id" => $vimeo_id, "time" => date("H:i:s",$time_video)]);
         return response([
-            "message"=>200
+            "message"=>200,
+            "vimeo_link"=>"http://player.vimeo.com/video/".$vimeo_id
+        ]);
+    }
+    public function upload_video_contenido(Request $request, $id){
+        $time = 0;
+        $track = new GetId3($request->file("video"));
+
+        // error_log($track->getPlaytimeSeconds());
+        $time_video = $track->getPlaytimeSeconds();
+
+
+        $response = Vimeo::upload($request->file("video"));
+        // error_log(json_encode($response));
+        // separo la respuesta del backend "/videos/h23j431" -> ["","videos","h23j431"] (donde h23j431 es el código en Vimeo)
+        $vimeo_id = explode("/",$response)[2];
+
+        $streaming = Streaming::findOrFail($id);
+        $streaming->update(["vimeo_id" => $vimeo_id, "time" => date("H:i:s",$time_video)]);
+        return response([
+            "message"=>200,
+            "vimeo_link"=>"http://player.vimeo.com/video/".$vimeo_id
         ]);
     }
 
