@@ -256,7 +256,7 @@ class StreamingController extends Controller
         $vimeo_id = explode("/",$response)[2];
 
         $streaming = Streaming::findOrFail($id);
-        $streaming->update(["vimeo_id" => $vimeo_id, "time" => date("H:i:s",$time_video)]);
+        $streaming->update(["vimeo_contenido_id" => $vimeo_id, "time_contenido" => date("H:i:s",$time_video)]);
         return response([
             "message"=>200,
             "vimeo_link"=>"http://player.vimeo.com/video/".$vimeo_id

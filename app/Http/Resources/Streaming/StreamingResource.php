@@ -28,6 +28,8 @@ class StreamingResource extends JsonResource
             ],
             "vimeo_id" => $this->resource->vimeo_id ? "http://player.vimeo.com/video/".$this->resource->vimeo_id : NULL,
             "time" => $this->resource->time,
+            "vimeo_contenido_id" => $this->resource->vimeo_contenido_id ? "http://player.vimeo.com/video/".$this->resource->vimeo_contenido_id : NULL,
+            "time_contenido" => $this->resource->time,
             "type" => $this->resource->type,
             "tags" => $this->resource->tags,
             "tags_multiple" => $this->resource->getTags(),
